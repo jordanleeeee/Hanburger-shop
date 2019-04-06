@@ -18,7 +18,7 @@ ostream& operator<<(ostream& os, const Status& s) {
     switch (s) {
         case preparing: os << "preparing"; break;
         case cooking: os << "cooking"; break;
-        case ready_to_serve: os << "ready_to_serve"; break;
+        case ready_to_serve: os << "ready to serve"; break;
     }
     return os;
 }
@@ -84,9 +84,9 @@ void Shop::action(){
 	}
 	else{
 		int num=choice-'0';
-		num=choice--;
+		num=choice-1;
 		if(num>0 && num<numOrder){
-
+			burger[num]->burgerOperation();
 		}
 		else{
 			cout<<"wrong input"<<endl;

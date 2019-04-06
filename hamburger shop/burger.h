@@ -39,62 +39,67 @@ class Burger{
 		Burger(Types);
 		~Burger();
 		void printBurgerInfo()const;
+		void burgerOperation();
 
 };
 
 Burger::Burger(Types type): type(type) {
 
-	//int randChoice= rand() % 5;	//0,1,2,3,4
 	initial_time=time(0);
 	burger_status=preparing;
 
 	switch(type){
-		case Cheesse: cooking_time=10;
-					  num_of_ingredients=5;
-					  ingredients=new Ingredient[num_of_ingredients];
-					  ingredients[0]=bread;
-					  ingredients[1]=cheese;
-					  ingredients[2]=tomato;
-					  ingredients[3]=lettuce;
-					  ingredients[4]=bread;
-					  break;
-		case Beef: cooking_time=10;
-				   num_of_ingredients=6;
-				   ingredients=new Ingredient[num_of_ingredients];
-				   ingredients[0]=bread;
-				   ingredients[1]=cheese;
-				   ingredients[2]=tomato;
-				   ingredients[3]=beef;
-				   ingredients[4]=lettuce;
-				   ingredients[5]=bread;
-				   break;
-		case Mushroom: cooking_time=15;
-					   num_of_ingredients=5;
-					   ingredients=new Ingredient[num_of_ingredients];
-					   ingredients[0]=bread;
-					   ingredients[1]=cheese;
-					   ingredients[2]=beef;
-					   ingredients[3]=mushroom;
-					   ingredients[4]=bread;
-					   break;
-		case Veggie: cooking_time=10;
-					   num_of_ingredients=5;
-					   ingredients=new Ingredient[num_of_ingredients];
-					   ingredients[0]=bread;
-					   ingredients[1]=tomato;
-					   ingredients[2]=egg;
-					   ingredients[3]=lettuce;
-					   ingredients[4]=bread;
-					   break;
-		case Salmon: cooking_time=15;
-					   num_of_ingredients=5;
-					   ingredients=new Ingredient[num_of_ingredients];
-					   ingredients[0]=bread;
-					   ingredients[1]=cheese;
-					   ingredients[2]=beef;
-					   ingredients[3]=salmon;
-					   ingredients[4]=bread;
-					   break;
+		case Cheesse:
+			cooking_time=10;
+			num_of_ingredients=5;
+			ingredients=new Ingredient[num_of_ingredients];
+			ingredients[0]=bread;
+			ingredients[1]=cheese;
+			ingredients[2]=tomato;
+			ingredients[3]=lettuce;
+			ingredients[4]=bread;
+			break;
+		case Beef:
+			cooking_time=10;
+			num_of_ingredients=6;
+			ingredients=new Ingredient[num_of_ingredients];
+			ingredients[0]=bread;
+			ingredients[1]=cheese;
+			ingredients[2]=tomato;
+			ingredients[3]=beef;
+			ingredients[4]=lettuce;
+			ingredients[5]=bread;
+			break;
+		case Mushroom:
+			cooking_time=15;
+			num_of_ingredients=5;
+			ingredients=new Ingredient[num_of_ingredients];
+			ingredients[0]=bread;
+			ingredients[1]=cheese;
+			ingredients[2]=beef;
+			ingredients[3]=mushroom;
+			ingredients[4]=bread;
+			break;
+		case Veggie:
+			cooking_time=10;
+			num_of_ingredients=5;
+			ingredients=new Ingredient[num_of_ingredients];
+			ingredients[0]=bread;
+			ingredients[1]=tomato;
+			ingredients[2]=egg;
+			ingredients[3]=lettuce;
+			ingredients[4]=bread;
+			break;
+		case Salmon:
+			cooking_time=15;
+			num_of_ingredients=5;
+			ingredients=new Ingredient[num_of_ingredients];
+			ingredients[0]=bread;
+			ingredients[1]=cheese;
+			ingredients[2]=beef;
+			ingredients[3]=salmon;
+			ingredients[4]=bread;
+			break;
 		default: cout<<"error"<<endl;
 	}
 }
@@ -114,7 +119,21 @@ void Burger::printBurgerInfo()const{
 	}
 	cout<<"\t"<<cooking_time<<endl;
 }
-
+void Burger::burgerOperation(){
+	switch(burger_status){
+		case preparing:
+			cout<<"preparing"<<endl;
+			break;
+		case cooking:
+			cout<<"cooking"<<endl;
+			break;
+		case ready_to_serve:
+			cout<<"ready to serve"<<endl;
+			break;
+		default:
+			cout<<"error"<<endl;
+	}
+}
 
 
 #endif /* BURGER_H_ */
