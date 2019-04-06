@@ -213,7 +213,7 @@ void Burger::preparingBurger(const int& num){
 void Burger::cookingBurger(const int& num){
 	cout<<"Order #\t"<<num+1<<endl;
 	int remaining_time=cooking_time-(time(0)-timeStartCook);
-	if(remaining_time>=0){
+	if(remaining_time>0){
 		cout<<"the burger is being cooking"<<endl;
 		cout<<"still need "<<remaining_time<<"s to get ready"<<endl;
 	}

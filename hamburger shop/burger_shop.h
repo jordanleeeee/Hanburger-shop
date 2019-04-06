@@ -43,6 +43,9 @@ Shop::Shop(): endGame(false), numOrder(0), maxNumOrder(MaxNumOrder), score(10){
 	}
 }
 Shop::~Shop(){
+	for(int i=0; i<MaxNumOrder; i++){
+		delete burger[i];
+	}
 	delete[] burger;
 	burger=nullptr;
 }
@@ -63,7 +66,7 @@ void Shop::removeCompletedOrder(){
 	}
 }
 void Shop::gameMenu(){
-	system("cls");
+	system(" cls ");
 	removeCompletedOrder();
 	cout<<"*** Order list ***"<<endl;
 	for(int i=0; i<numOrder; i++){

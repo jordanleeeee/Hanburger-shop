@@ -15,7 +15,6 @@ void burgerMenue();
 void instruction();
 void credit();
 
-
 int main()
 {
 	int choice;
