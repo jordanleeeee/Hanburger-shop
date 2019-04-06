@@ -17,7 +17,6 @@ void startgame(){
 	}
 	while(!burgerShop.getGameStatus()){
 		burgerShop.gameMenu();
-		burgerShop.action();
 	}
 }
 //here is function relation to setting

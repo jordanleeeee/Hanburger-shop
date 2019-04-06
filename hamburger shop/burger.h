@@ -12,6 +12,8 @@
 #include <cstdlib>
 #include <ctime>
 
+int TimeLimit=40;
+
 enum Types{Cheesse, Beef, Mushroom, Veggie, Salmon};
 enum Status{preparing, cooking, ready_to_serve};
 
@@ -26,6 +28,15 @@ ostream& operator<<(ostream& os, const Types& t) {
     return os;
 }
 
+ostream& operator<<(ostream& os, const Status& s) {
+    switch (s) {
+        case preparing: os << "preparing"; break;
+        case cooking: os << "cooking"; break;
+        case ready_to_serve: os << "ready to serve"; break;
+    }
+    return os;
+}
+
 class Burger{
 	private:
 		Types type;
@@ -33,17 +44,22 @@ class Burger{
 		Status burger_status;
 		int num_of_ingredients;
 		int cooking_time;
+		int timeStartCook;
 		int initial_time;
+		int time_limit;
 		friend class Shop;
 	public:
 		Burger(Types);
 		~Burger();
+		void printRemainingTime()const;
 		void printBurgerInfo()const;
-		void burgerOperation();
-
+		void burgerOperation(const int&);
+		void preparingBurger(const int&);
+		void cookingBurger(const int&);
+		void ready_to_serveBurger(const int&);
 };
 
-Burger::Burger(Types type): type(type) {
+Burger::Burger(Types type): type(type), timeStartCook(0), time_limit(TimeLimit) {
 
 	initial_time=time(0);
 	burger_status=preparing;
@@ -55,7 +71,7 @@ Burger::Burger(Types type): type(type) {
 			ingredients=new Ingredient[num_of_ingredients];
 			ingredients[0]=bread;
 			ingredients[1]=cheese;
-			ingredients[2]=tomato;
+			ingredients[2]=beef;
 			ingredients[3]=lettuce;
 			ingredients[4]=bread;
 			break;
@@ -106,6 +122,17 @@ Burger::Burger(Types type): type(type) {
 Burger::~Burger(){
 	delete[] ingredients;
 }
+void Burger::printRemainingTime()const{
+	int times = time_limit - (time(0)-initial_time);
+	int mins=times/60;
+	int seconds=times%60;
+	if(times<0){
+		mins=seconds=0;
+	}
+	cout<<mins<<"\'"<<seconds<<"\""<<endl;
+
+	return;
+}
 void Burger::printBurgerInfo()const{
 	cout<<type<<" burger"<<"\t";
 	for(int i=0; i<num_of_ingredients; i++){
@@ -119,21 +146,82 @@ void Burger::printBurgerInfo()const{
 	}
 	cout<<"\t"<<cooking_time<<endl;
 }
-void Burger::burgerOperation(){
+void Burger::burgerOperation(const int& num){
 	switch(burger_status){
 		case preparing:
-			cout<<"preparing"<<endl;
+			preparingBurger(num);
 			break;
 		case cooking:
-			cout<<"cooking"<<endl;
+			cookingBurger(num);
 			break;
 		case ready_to_serve:
 			cout<<"ready to serve"<<endl;
+			ready_to_serveBurger(num);
 			break;
 		default:
 			cout<<"error"<<endl;
 	}
 }
+void Burger::preparingBurger(const int& num){
+	cout<<"*** Process Order ***\n";
+	cout<<"Order #\t\t\t: "<<num+1<<endl;
+	cout<<"Burger\t\t\t: "<<type<< " Burger"<<endl;
+	cout<<"Status\t\t\t: "<<burger_status<<endl;
+	cout<<"Remaining Time\t\t: ";
+	printRemainingTime();
+	cout<<"Burger Ingredient List\t:";
+	for(int i=0; i<num_of_ingredients; i++){
+		ingredients[i].printIngredientName();
+	}
+	cout<<endl;
+	cout<<"Burger Key List\t\t:";
+	for(int i=0; i<num_of_ingredients; i++){
+		cout<<ingredients[i].symbol;
+	}
+	cout<<endl<<endl;
+	cout<<"Please choose [U] for update, [R] for return, or\n";
+	cout<<"type correct key list to start cooking:"<<endl;
+
+	string input;
+	cin>>input;
+	if(input=="U" || input == "u"){
+		preparingBurger(num);
+	}
+	else if(input=="R" || input == "r"){
+		return;
+	}
+	else{
+		int num_of_correct=0;
+		if(input.length()==static_cast<unsigned int>(num_of_ingredients)){
+			for(int i=0; i<num_of_ingredients; i++){
+				if(input[i]==ingredients[i].symbol){
+					num_of_correct++;
+				}
+			}
+		}
+		if(num_of_correct==num_of_ingredients){
+			cout<<"Cook success"<<endl;
+			burger_status=cooking;
+			timeStartCook=time(0);
+		}
+	}
+}
+void Burger::cookingBurger(const int& num){
+	cout<<"Order #\t"<<num+1<<endl;
+	int remaining_time=cooking_time-(time(0)-timeStartCook);
+	if(remaining_time>=0){
+		cout<<"the burger is being cooking"<<endl;
+		cout<<"still need "<<remaining_time<<"s to get ready"<<endl;
+	}
+	else{
+		cout<<"the burger is cooked and get ready to serve"<<endl;
+		burger_status=ready_to_serve;
+	}
+}
+void Burger::ready_to_serveBurger(const int& num){
+
+}
+
 
 
 #endif /* BURGER_H_ */

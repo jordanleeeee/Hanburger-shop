@@ -24,6 +24,16 @@ struct Ingredient{
 				cout<<name<<"\t\t"<<Symbol<<'/'<<symbol<<endl;
 			}
 		}
+		void printIngredientName(){
+			if(name!="Beef"){
+				string str(name, 1);
+				cout<<'['<<Symbol<<']'<<str<<", ";
+			}
+			else{
+				string str(name, 0, 3);
+				cout<<str<<'['<<Symbol<<']'<<", ";
+			}
+		}
 };
 
 Ingredient bread{"Bread", 'B', 'b'};

@@ -11,17 +11,7 @@
 #include "burger.h"
 
 int MaxNumOrder=5;
-int TimeLimit=40;
 const int TYPEOFBURGER=5;
-
-ostream& operator<<(ostream& os, const Status& s) {
-    switch (s) {
-        case preparing: os << "preparing"; break;
-        case cooking: os << "cooking"; break;
-        case ready_to_serve: os << "ready to serve"; break;
-    }
-    return os;
-}
 
 Burger cheeseBurger(Cheesse);
 Burger beefBurger(Beef);
@@ -34,19 +24,18 @@ class Shop{
 		bool endGame;
 		int numOrder;
 		int maxNumOrder;
-		int timeLimit;
 		int score;
 		Burger** burger;
 	public:
 		Shop();
 		~Shop();
 		void addOrder();
-		void gameMenu() const;
+		void gameMenu();
 		bool getGameStatus() const;
 		void action();
 };
 
-Shop::Shop(): endGame(false), numOrder(0), maxNumOrder(MaxNumOrder), timeLimit(TimeLimit), score(10){
+Shop::Shop(): endGame(false), numOrder(0), maxNumOrder(MaxNumOrder), score(10){
 	burger=new Burger*[MaxNumOrder];
 	for(int i=0; i<MaxNumOrder; i++){
 		burger[i]=nullptr;
@@ -60,15 +49,18 @@ void Shop::addOrder(){
 	int randBurger = rand()% TYPEOFBURGER;
 	burger[numOrder++] = new Burger(static_cast<Types>(randBurger));
 }
-void Shop::gameMenu() const{
+void Shop::gameMenu(){
 	cout<<"*** Order list ***"<<endl;
 	for(int i=0; i<numOrder; i++){
 		cout<<"Order #"<<i+1<<": "<<burger[i]->type<<" burger, ";
-		cout<<burger[i]->burger_status<<", "<<timeLimit<<endl;
+		cout<<burger[i]->burger_status<<", ";
+		burger[i]->printRemainingTime();
 	}
 	cout<<"-----------------------------------------------"<<endl;
 	cout<<"Score: "<<score<<endl;
-	cout<<"Enter [U] for update, [Q] for Quit, or [1-"<<numOrder<<"] for order:"<<endl;
+	cout<<"Enter [U] for update, [Q] for Quit, or [1-"<<numOrder<<"] for order: "<<endl;
+
+	action();
 }
 bool Shop::getGameStatus() const{
 	return endGame;
@@ -84,12 +76,12 @@ void Shop::action(){
 	}
 	else{
 		int num=choice-'0';
-		num=choice-1;
-		if(num>0 && num<numOrder){
-			burger[num]->burgerOperation();
+		num--;
+		if(num>=0 && num<numOrder){
+			burger[num]->burgerOperation(num);
 		}
 		else{
-			cout<<"wrong input"<<endl;
+			cout<<"wrong input...."<<endl;
 		}
 	}
 }
