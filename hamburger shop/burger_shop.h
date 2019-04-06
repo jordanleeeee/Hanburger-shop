@@ -63,6 +63,7 @@ void Shop::removeCompletedOrder(){
 	}
 }
 void Shop::gameMenu(){
+	system("cls");
 	removeCompletedOrder();
 	cout<<"*** Order list ***"<<endl;
 	for(int i=0; i<numOrder; i++){
@@ -86,7 +87,7 @@ void Shop::action(){
 		//do sth to update
 	}
 	else if(choice=='Q'||choice=='q'){
-		cout<<"comfirm quit game?"<<endl;
+		cout<<"confirm quit game?"<<endl;
 		char input;
 
 		bool valid=false;

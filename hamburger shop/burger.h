@@ -205,6 +205,9 @@ void Burger::preparingBurger(const int& num){
 			burger_status=cooking;
 			timeStartCook=time(0);
 		}
+		else{
+			cout<<"cook not successful, wrong correct key list"<<endl;
+		}
 	}
 }
 void Burger::cookingBurger(const int& num){
