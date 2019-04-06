@@ -15,7 +15,7 @@
 int TimeLimit=40;
 
 enum Types{Cheesse, Beef, Mushroom, Veggie, Salmon};
-enum Status{preparing, cooking, ready_to_serve};
+enum Status{preparing, cooking, ready_to_serve, completed};
 
 ostream& operator<<(ostream& os, const Types& t) {
     switch (t) {
@@ -33,6 +33,7 @@ ostream& operator<<(ostream& os, const Status& s) {
         case preparing: os << "preparing"; break;
         case cooking: os << "cooking"; break;
         case ready_to_serve: os << "ready to serve"; break;
+        default:cout<<"error"<<endl;
     }
     return os;
 }
@@ -53,10 +54,10 @@ class Burger{
 		~Burger();
 		void printRemainingTime()const;
 		void printBurgerInfo()const;
-		void burgerOperation(const int&);
+		void burgerOperation(const int&, int&);
 		void preparingBurger(const int&);
 		void cookingBurger(const int&);
-		void ready_to_serveBurger(const int&);
+		void ready_to_serveBurger(const int&, int&);
 };
 
 Burger::Burger(Types type): type(type), timeStartCook(0), time_limit(TimeLimit) {
@@ -146,7 +147,7 @@ void Burger::printBurgerInfo()const{
 	}
 	cout<<"\t"<<cooking_time<<endl;
 }
-void Burger::burgerOperation(const int& num){
+void Burger::burgerOperation(const int& num, int& score){
 	switch(burger_status){
 		case preparing:
 			preparingBurger(num);
@@ -156,7 +157,7 @@ void Burger::burgerOperation(const int& num){
 			break;
 		case ready_to_serve:
 			cout<<"ready to serve"<<endl;
-			ready_to_serveBurger(num);
+			ready_to_serveBurger(num, score);
 			break;
 		default:
 			cout<<"error"<<endl;
@@ -218,7 +219,11 @@ void Burger::cookingBurger(const int& num){
 		burger_status=ready_to_serve;
 	}
 }
-void Burger::ready_to_serveBurger(const int& num){
+void Burger::ready_to_serveBurger(const int& num, int& score){
+	cout<<"Order #\t"<<num+1<<endl;
+	cout<<"order completed, well done"<<endl;
+	burger_status=completed;
+	score+=10;
 
 }
 

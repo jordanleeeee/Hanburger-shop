@@ -33,6 +33,7 @@ class Shop{
 		void gameMenu();
 		bool getGameStatus() const;
 		void action();
+		void removeCompletedOrder();
 };
 
 Shop::Shop(): endGame(false), numOrder(0), maxNumOrder(MaxNumOrder), score(10){
@@ -49,7 +50,20 @@ void Shop::addOrder(){
 	int randBurger = rand()% TYPEOFBURGER;
 	burger[numOrder++] = new Burger(static_cast<Types>(randBurger));
 }
+void Shop::removeCompletedOrder(){
+	for(int i=0; i<numOrder; i++){
+		if(burger[i]->burger_status==completed){
+			delete burger[i];
+			for(int j=i; j<numOrder-1; j++){
+				burger[j]=burger[j+1];
+			}
+			numOrder--;
+			return;
+		}
+	}
+}
 void Shop::gameMenu(){
+	removeCompletedOrder();
 	cout<<"*** Order list ***"<<endl;
 	for(int i=0; i<numOrder; i++){
 		cout<<"Order #"<<i+1<<": "<<burger[i]->type<<" burger, ";
@@ -72,13 +86,30 @@ void Shop::action(){
 		//do sth to update
 	}
 	else if(choice=='Q'||choice=='q'){
-		endGame=true;
+		cout<<"comfirm quit game?"<<endl;
+		char input;
+
+		bool valid=false;
+		while(!valid){
+			cin>>input;
+			if(input=='y' ||input=='Y'){
+				endGame=true;
+				valid=true;
+			}
+			else if(input=='n' ||input=='N'){
+				valid=true;
+				return;
+			}
+			else{
+				cout<<"please input Y/y/N/n"<<endl;
+			}
+		}
 	}
 	else{
 		int num=choice-'0';
 		num--;
 		if(num>=0 && num<numOrder){
-			burger[num]->burgerOperation(num);
+			burger[num]->burgerOperation(num, score);
 		}
 		else{
 			cout<<"wrong input...."<<endl;
