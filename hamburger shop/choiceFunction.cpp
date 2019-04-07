@@ -17,6 +17,10 @@ void startgame(){
 	}
 	while(!burgerShop.getGameStatus()){
 		burgerShop.gameMenu();
+		burgerShop.removeCompletedOrder();
+		burgerShop.removeOutOfTimeOrder();
+		burgerShop.randomlyAddOrder();
+		burgerShop.checkingLoss();
 	}
 }
 //here is function relation to setting

@@ -17,7 +17,7 @@ class Shop{
 	private:
 		bool endGame;
 		int numOrder;
-		int maxNumOrder;
+		const int maxNumOrder;
 		int score;
 		Burger** burger;
 	public:
@@ -25,6 +25,7 @@ class Shop{
 		~Shop();
 		void addOneOrder();
 		void randomlyAddOrder();
+		void checkingLoss();
 		void gameMenu();
 		bool getGameStatus() const;
 		void action();
@@ -33,21 +34,21 @@ class Shop{
 };
 
 Shop::Shop(): endGame(false), numOrder(0), maxNumOrder(MaxNumOrder), score(10){
-	burger=new Burger*[MaxNumOrder];
-	for(int i=0; i<MaxNumOrder; i++){
+	burger=new Burger*[maxNumOrder];
+	for(int i=0; i<maxNumOrder; i++){
 		burger[i]=nullptr;
 	}
 }
 Shop::~Shop(){
-	cout<<"delete shop"<<endl;
-	for(int i=0; i<MaxNumOrder; i++){
+	cout<<"delete shop"<<endl;			//MAY HAVE PROBLEM
+	for(int i=0; i<maxNumOrder; i++){
 		delete burger[i];
 	}
 	delete[] burger;
 	burger=nullptr;
 }
 void Shop::addOneOrder(){
-	if(numOrder>=MaxNumOrder){
+	if(numOrder>=maxNumOrder){
 		return;
 	}
 	int randBurger = rand()% TYPEOFBURGER;
@@ -70,11 +71,12 @@ void Shop::randomlyAddOrder(){
 		addOneOrder();
 	}
 }
-void Shop::removeCompletedOrder(){
+void Shop::removeCompletedOrder(){					//some error
 	for(int i=0; i<numOrder; i++){
 		if(burger[i]->burger_status==completed){
 			delete burger[i];
-			for(int j=i; j<numOrder-1; j++){
+			burger[i]=nullptr;
+			for(int j=i; j<numOrder; j++){
 				burger[j]=burger[j+1];
 			}
 			numOrder--;
@@ -82,22 +84,27 @@ void Shop::removeCompletedOrder(){
 		}
 	}
 }
-void Shop::removeOutOfTimeOrder(){
+void Shop::removeOutOfTimeOrder(){					//some error
 	for(int i=0; i<numOrder; i++){
 		if(burger[i]->getRemainingTime()<0){
 			delete burger[i];
-			for(int j=i; j<numOrder-1; j++){
+			burger[i]=nullptr;
+			for(int j=i; j<numOrder; j++){
 				burger[j]=burger[j+1];
 			}
+			burger[numOrder]=nullptr;
 			numOrder--;
 			score-=5;
 		}
 	}
 }
+void Shop::checkingLoss(){
+	if(score<0){
+		cout<<"your score is below 0, GameOver"<<endl;
+		endGame=true;
+	}
+}
 void Shop::gameMenu(){		//process order page
-	removeCompletedOrder();
-	removeOutOfTimeOrder();
-	randomlyAddOrder();
 	cout<<"*** Order list ***"<<endl;
 	for(int i=0; i<numOrder; i++){
 		cout<<"Order #"<<i+1<<": "<<burger[i]->type<<" burger, ";
