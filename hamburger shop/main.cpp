@@ -7,6 +7,7 @@
 
 #include <iostream>
 
+
 using namespace std;
 
 void startgame();
@@ -14,6 +15,7 @@ void setting();
 void burgerMenue();
 void instruction();
 void credit();
+
 
 int main()
 {
@@ -46,5 +48,6 @@ int main()
 	cout<<"Game End, thx for playing"<<endl;
 	return 0;
 }
+
 
 

@@ -46,4 +46,6 @@ Ingredient egg{"Egg", 'E', 'e'};
 Ingredient salmon{"Salmon", 'S', 's'};
 
 
+
+
 #endif /* INGREDIENTS_H_ */

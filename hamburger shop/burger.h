@@ -52,6 +52,7 @@ class Burger{
 	public:
 		Burger(Types);
 		~Burger();
+		int getRemainingTime() const;
 		void printRemainingTime()const;
 		void printBurgerInfo()const;
 		void burgerOperation(const int&, int&);
@@ -123,8 +124,11 @@ Burger::Burger(Types type): type(type), timeStartCook(0), time_limit(TimeLimit) 
 Burger::~Burger(){
 	delete[] ingredients;
 }
+int Burger::getRemainingTime()const{
+	return time_limit - (time(0)-initial_time);
+}
 void Burger::printRemainingTime()const{
-	int times = time_limit - (time(0)-initial_time);
+	int times = getRemainingTime();
 	int mins=times/60;
 	int seconds=times%60;
 	if(times<0){
@@ -227,9 +231,7 @@ void Burger::ready_to_serveBurger(const int& num, int& score){
 	cout<<"order completed, well done"<<endl;
 	burger_status=completed;
 	score+=10;
-
 }
-
 
 
 #endif /* BURGER_H_ */

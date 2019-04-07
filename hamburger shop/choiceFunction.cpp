@@ -5,15 +5,15 @@
  *      Author: User3w
  */
 #include <iostream>
-#include"burger_shop.h"
-
 using namespace std;
+
+#include"burger_shop.h"
 
 void startgame(){
 	Shop burgerShop;
 	int initialNumBurger = rand()% MaxNumOrder+1;
 	for(int i=0; i<initialNumBurger; i++){
-		burgerShop.addOrder();
+		burgerShop.addOneOrder();
 	}
 	while(!burgerShop.getGameStatus()){
 		burgerShop.gameMenu();
@@ -82,16 +82,20 @@ void setting(){
 //here is function relation to Display Burger Menu
 void displayTypeBurger(){
 	cout<<"Type of burger\tIngredients orders\t\t\t\tCooking time"<<endl;
-	cheeseBurger.printBurgerInfo();
-	beefBurger.printBurgerInfo();
-	mushroomBurger.printBurgerInfo();
-	veggieBurger.printBurgerInfo();
-	salmonBurger.printBurgerInfo();
+	Burger** burger=new Burger*[TYPEOFBURGER];
+	for(int i=0; i<TYPEOFBURGER; i++){
+		burger[i]=new Burger(static_cast<Types>(i));
+		burger[i]->printBurgerInfo();
+	}
+	for(int i=0; i<TYPEOFBURGER; i++){
+		delete burger[i];
+	}
+	delete[] burger;
 	system("pause");
-
 }
 void displayIngredientSymble(){
 	cout<<"Ingredients\tSymbol"<<endl;
+	Burger x(Cheesse);
 	bread.printDetail();
 	cheese.printDetail();
 	beef.printDetail();

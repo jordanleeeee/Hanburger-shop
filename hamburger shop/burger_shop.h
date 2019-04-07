@@ -13,12 +13,6 @@
 int MaxNumOrder=5;
 const int TYPEOFBURGER=5;
 
-Burger cheeseBurger(Cheesse);
-Burger beefBurger(Beef);
-Burger mushroomBurger(Mushroom);
-Burger veggieBurger(Veggie);
-Burger salmonBurger(Salmon);
-
 class Shop{
 	private:
 		bool endGame;
@@ -29,11 +23,13 @@ class Shop{
 	public:
 		Shop();
 		~Shop();
-		void addOrder();
+		void addOneOrder();
+		void randomlyAddOrder();
 		void gameMenu();
 		bool getGameStatus() const;
 		void action();
 		void removeCompletedOrder();
+		void removeOutOfTimeOrder();
 };
 
 Shop::Shop(): endGame(false), numOrder(0), maxNumOrder(MaxNumOrder), score(10){
@@ -43,15 +39,36 @@ Shop::Shop(): endGame(false), numOrder(0), maxNumOrder(MaxNumOrder), score(10){
 	}
 }
 Shop::~Shop(){
+	cout<<"delete shop"<<endl;
 	for(int i=0; i<MaxNumOrder; i++){
 		delete burger[i];
 	}
 	delete[] burger;
 	burger=nullptr;
 }
-void Shop::addOrder(){
+void Shop::addOneOrder(){
+	if(numOrder>=MaxNumOrder){
+		return;
+	}
 	int randBurger = rand()% TYPEOFBURGER;
 	burger[numOrder++] = new Burger(static_cast<Types>(randBurger));
+}
+void Shop::randomlyAddOrder(){
+	//may change (New orders are generated randomly with a certain probability)
+	int randNum = rand()% 5;		//0,1,2,3,4
+	int randNumBurger=0;
+	if(randNum==0 || randNum==1){
+		randNumBurger = 0;
+	}
+	else if(randNum==2 || randNum==3){
+		randNumBurger = 1;
+	}
+	else{
+		randNumBurger = 2;
+	}
+	for(int i=0; i<randNumBurger; i++){
+		addOneOrder();
+	}
 }
 void Shop::removeCompletedOrder(){
 	for(int i=0; i<numOrder; i++){
@@ -65,9 +82,22 @@ void Shop::removeCompletedOrder(){
 		}
 	}
 }
-void Shop::gameMenu(){
-	system(" cls ");
+void Shop::removeOutOfTimeOrder(){
+	for(int i=0; i<numOrder; i++){
+		if(burger[i]->getRemainingTime()<0){
+			delete burger[i];
+			for(int j=i; j<numOrder-1; j++){
+				burger[j]=burger[j+1];
+			}
+			numOrder--;
+			score-=5;
+		}
+	}
+}
+void Shop::gameMenu(){		//process order page
 	removeCompletedOrder();
+	removeOutOfTimeOrder();
+	randomlyAddOrder();
 	cout<<"*** Order list ***"<<endl;
 	for(int i=0; i<numOrder; i++){
 		cout<<"Order #"<<i+1<<": "<<burger[i]->type<<" burger, ";
@@ -87,7 +117,7 @@ void Shop::action(){
 	char choice;
 	cin>>choice;
 	if(choice=='U'||choice=='u'){
-		//do sth to update
+		return;
 	}
 	else if(choice=='Q'||choice=='q'){
 		cout<<"confirm quit game?"<<endl;
@@ -120,7 +150,6 @@ void Shop::action(){
 		}
 	}
 }
-
 
 
 #endif /* BURGER_SHOP_H_ */
