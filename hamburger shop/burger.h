@@ -13,13 +13,12 @@
 #include <ctime>
 
 int TimeLimit=40;
-
-enum Types{Cheesse, Beef, Mushroom, Veggie, Salmon};
+enum Types{Cheese, Beef, Mushroom, Veggie, Salmon};
 enum Status{preparing, cooking, ready_to_serve, completed};
 
 ostream& operator<<(ostream& os, const Types& t) {
     switch (t) {
-        case Cheesse: os << "Cheesse"; break;
+        case Cheese: os << "Cheese"; break;
         case Beef: os << "Beef"; break;
         case Mushroom: os << "Mushroom"; break;
         case Veggie: os << "Veggie"; break;
@@ -67,7 +66,7 @@ Burger::Burger(Types type): type(type), timeStartCook(0), time_limit(TimeLimit) 
 	burger_status=preparing;
 
 	switch(type){
-		case Cheesse:
+		case Cheese:
 			cooking_time=10;
 			num_of_ingredients=5;
 			ingredients=new Ingredient[num_of_ingredients];
@@ -219,7 +218,7 @@ void Burger::cookingBurger(const int& num){
 	int remaining_time=cooking_time-(time(0)-timeStartCook);
 	if(remaining_time>0){
 		cout<<"the burger is being cooking"<<endl;
-		cout<<"still need "<<remaining_time<<"s to get ready"<<endl;
+		cout<<"still need ["<<remaining_time<<" sec] to get ready"<<endl;
 	}
 	else{
 		cout<<"the burger is cooked and get ready to serve"<<endl;
@@ -232,6 +231,8 @@ void Burger::ready_to_serveBurger(const int& num, int& score){
 	burger_status=completed;
 	score+=10;
 }
+
+
 
 
 #endif /* BURGER_H_ */

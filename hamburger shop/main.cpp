@@ -7,7 +7,6 @@
 
 #include <iostream>
 
-
 using namespace std;
 
 void startgame();
@@ -22,7 +21,7 @@ int main()
 	int choice;
 	bool endGame=false;
 	//TODO write your welcome message
-	cout<<"Welcome Message designed by your group\n";
+	cout<<"Welcome to Hamburger Shop Game\n";
 	while(!endGame){
 		cout<<"*** Game Menu ***\n";
 		cout<<"[1] Start Game\n";

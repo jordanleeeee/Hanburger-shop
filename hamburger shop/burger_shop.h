@@ -23,11 +23,12 @@ class Shop{
 	public:
 		Shop();
 		~Shop();
+		bool getGameStatus() const;
+		int getScore() const;
 		void addOneOrder();
 		void randomlyAddOrder();
 		void checkingLoss();
 		void gameMenu();
-		bool getGameStatus() const;
 		void action();
 		void removeCompletedOrder();
 		void removeOutOfTimeOrder();
@@ -40,7 +41,7 @@ Shop::Shop(): endGame(false), numOrder(0), maxNumOrder(MaxNumOrder), score(10){
 	}
 }
 Shop::~Shop(){
-	cout<<"delete shop"<<endl;			//MAY HAVE PROBLEM
+	//MAY HAVE PROBLEM
 	for(int i=0; i<maxNumOrder; i++){
 		delete burger[i];
 	}
@@ -74,11 +75,11 @@ void Shop::randomlyAddOrder(){
 void Shop::removeCompletedOrder(){					//some error
 	for(int i=0; i<numOrder; i++){
 		if(burger[i]->burger_status==completed){
-			delete burger[i];
 			burger[i]=nullptr;
 			for(int j=i; j<numOrder; j++){
 				burger[j]=burger[j+1];
 			}
+			burger[numOrder]=nullptr;
 			numOrder--;
 			return;
 		}
@@ -116,6 +117,9 @@ void Shop::gameMenu(){		//process order page
 	cout<<"Enter [U] for update, [Q] for Quit, or [1-"<<numOrder<<"] for order: "<<endl;
 
 	action();
+}
+int Shop::getScore()const{
+	return (score<0)? 0: score;
 }
 bool Shop::getGameStatus() const{
 	return endGame;

@@ -22,6 +22,7 @@ void startgame(){
 		burgerShop.randomlyAddOrder();
 		burgerShop.checkingLoss();
 	}
+	cout<<"your final score is "<<burgerShop.getScore()<<endl;
 }
 //here is function relation to setting
 void setTimeLimit(){
@@ -99,7 +100,6 @@ void displayTypeBurger(){
 }
 void displayIngredientSymble(){
 	cout<<"Ingredients\tSymbol"<<endl;
-	Burger x(Cheesse);
 	bread.printDetail();
 	cheese.printDetail();
 	beef.printDetail();
@@ -114,6 +114,7 @@ void burgerMenue(){
 	bool done=false;
 	int choice;
 	while(!done){
+		system("CLS");
 		cout<<"**** Burger Menu *****\n";
 		cout<<"[1] Types of Burger\n";
 		cout<<"[2] Ingredient Symbols\n";
@@ -133,7 +134,6 @@ void burgerMenue(){
 
 //TODO write instruction here
 void instruction(){
-	//system("cls");
 	cout<<"write instruction here................."<<endl;
 	system("pause"); // Wait until user pressing any key to continue
 
@@ -141,8 +141,7 @@ void instruction(){
 
 //TODO write your info here
 void credit(){
-	//system("cls");
-	cout<<"cout sth.............."<<endl;
+	cout<<"Written by HKUST CS Students"<<endl;
 	system("pause"); // Wait until user pressing any key to continue
 }
 
