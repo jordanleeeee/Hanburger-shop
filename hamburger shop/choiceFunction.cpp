@@ -23,6 +23,7 @@ void startgame(){
 		burgerShop.checkingLoss();
 	}
 	cout<<"your final score is "<<burgerShop.getScore()<<endl;
+	cout<<"Maybe you want to play the game again"<<endl;
 }
 //here is function relation to setting
 void setTimeLimit(){
