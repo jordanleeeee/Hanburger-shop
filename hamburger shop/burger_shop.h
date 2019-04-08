@@ -11,7 +11,7 @@
 #include "burger.h"
 
 int MaxNumOrder=5;
-const int TYPEOFBURGER=5;
+const int TYPEOFBURGER=6;
 
 class Shop{
 	private:
@@ -131,7 +131,7 @@ void Shop::action(){
 		return;
 	}
 	else if(choice=='Q'||choice=='q'){
-		cout<<"confirm quit game?"<<endl;
+		cout<<"confirm quit current game? (Y/N)"<<endl;
 		char input;
 
 		bool valid=false;

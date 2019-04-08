@@ -14,7 +14,7 @@ void setting();
 void burgerMenue();
 void instruction();
 void credit();
-
+void quitGame(bool&);
 
 int main()
 {
@@ -40,7 +40,7 @@ int main()
 			case 3: burgerMenue(); break;		//complete
 			case 4: instruction(); break;		//incomplete
 			case 5: credit(); break;			//incomplete
-			case 6: endGame=true; break;		//incomplete
+			case 6: quitGame(endGame); break;		//incomplete
 			default: cout<<"wrong input"<<endl; break;
 		}
 	}

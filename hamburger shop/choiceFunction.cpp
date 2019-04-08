@@ -83,20 +83,15 @@ void setting(){
 			default: cout<<"wrong input"<<endl; break;
 		}
 	}
-
 }
 //here is function relation to Display Burger Menu
 void displayTypeBurger(){
 	cout<<"Type of burger\tIngredients orders\t\t\t\tCooking time"<<endl;
-	Burger** burger=new Burger*[TYPEOFBURGER];
 	for(int i=0; i<TYPEOFBURGER; i++){
-		burger[i]=new Burger(static_cast<Types>(i));
-		burger[i]->printBurgerInfo();
+		Burger* burger=new Burger(static_cast<Types>(i));
+		burger->printBurgerInfo();
+		delete burger;
 	}
-	for(int i=0; i<TYPEOFBURGER; i++){
-		delete burger[i];
-	}
-	delete[] burger;
 	system("pause");
 }
 void displayIngredientSymble(){
@@ -109,6 +104,7 @@ void displayIngredientSymble(){
 	mushroom.printDetail();
 	egg.printDetail();
 	salmon.printDetail();
+	chicken.printDetail();
 	system("pause");
 }
 void burgerMenue(){
@@ -144,6 +140,27 @@ void instruction(){
 void credit(){
 	cout<<"Written by HKUST CS Students"<<endl;
 	system("pause"); // Wait until user pressing any key to continue
+}
+
+void quitGame(bool& endGame){
+
+	cout<<"confirm quit game? (Y/N)"<<endl;
+	char input;
+	bool valid=false;
+	while(!valid){
+		cin>>input;
+		if(input=='y' ||input=='Y'){
+			endGame=true;
+			valid=true;
+		}
+		else if(input=='n' ||input=='N'){
+			valid=true;
+			return;
+		}
+		else{
+			cout<<"please input Y/y/N/n"<<endl;
+		}
+	}
 }
 
 

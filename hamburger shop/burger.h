@@ -13,7 +13,8 @@
 #include <ctime>
 
 int TimeLimit=40;
-enum Types{Cheese, Beef, Mushroom, Veggie, Salmon};
+
+enum Types{Cheese, Beef, Mushroom, Veggie, Salmon, Chicken};
 enum Status{preparing, cooking, ready_to_serve, completed};
 
 ostream& operator<<(ostream& os, const Types& t) {
@@ -23,6 +24,7 @@ ostream& operator<<(ostream& os, const Types& t) {
         case Mushroom: os << "Mushroom"; break;
         case Veggie: os << "Veggie"; break;
         case Salmon: os << "Salmon"; break;
+        case Chicken: os << "Chicken"; break;
     }
     return os;
 }
@@ -115,6 +117,16 @@ Burger::Burger(Types type): type(type), timeStartCook(0), time_limit(TimeLimit) 
 			ingredients[1]=cheese;
 			ingredients[2]=beef;
 			ingredients[3]=salmon;
+			ingredients[4]=bread;
+			break;
+		case Chicken:
+			cooking_time=15;
+			num_of_ingredients=5;
+			ingredients=new Ingredient[num_of_ingredients];
+			ingredients[0]=bread;
+			ingredients[1]=tomato;
+			ingredients[2]=chicken;
+			ingredients[3]=cheese;
 			ingredients[4]=bread;
 			break;
 		default: cout<<"error"<<endl;
@@ -210,6 +222,7 @@ void Burger::preparingBurger(const int& num){
 		}
 		else{
 			cout<<"cook not successful, wrong correct key list"<<endl;
+			preparingBurger(num);
 		}
 	}
 }

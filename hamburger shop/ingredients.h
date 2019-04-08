@@ -25,13 +25,19 @@ struct Ingredient{
 			}
 		}
 		void printIngredientName(){
-			if(name!="Beef"){
-				string str(name, 1);
-				cout<<'['<<Symbol<<']'<<str<<", ";
+
+			if(name=="Chicken"){
+				string str1(name,0,4);
+				string str2(name,6,7);
+				cout<<str1<<'['<<Symbol<<']'<<str2<<", ";
 			}
-			else{
+			else if (name=="Beef"){
 				string str(name, 0, 3);
 				cout<<str<<'['<<Symbol<<']'<<", ";
+			}
+			else{
+				string str(name, 1);
+				cout<<'['<<Symbol<<']'<<str<<", ";
 			}
 		}
 };
@@ -44,5 +50,6 @@ Ingredient tomato{"Tomato", 'T', 't'};
 Ingredient mushroom{"Mushroom", 'M', 'm'};
 Ingredient egg{"Egg", 'E', 'e'};
 Ingredient salmon{"Salmon", 'S', 's'};
+Ingredient chicken{"Chicken", 'K', 'k'};
 
 #endif /* INGREDIENTS_H_ */
