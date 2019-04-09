@@ -15,8 +15,6 @@
 
 using namespace std;
 
-
-
 enum Types{Cheese, Beef, Mushroom, Veggie, Salmon, Chicken};
 enum Status{preparing, cooking, ready_to_serve, completed};
 
@@ -44,8 +42,6 @@ class Burger{
 		void cookingBurger(const int&);
 		void ready_to_serveBurger(const int&, int&);
 };
-
-
 
 
 

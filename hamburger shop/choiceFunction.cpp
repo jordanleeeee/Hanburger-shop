@@ -9,9 +9,13 @@ using namespace std;
 
 #include"burger_shop.h"
 
+int MaxNumOrder=5;
+const int TYPEOFBURGER=6;
+int TimeLimit=40;
+
 void startgame(){
-	Shop burgerShop;
-	int initialNumBurger = rand()% MaxNumOrder+1;
+	Shop burgerShop(MaxNumOrder, TYPEOFBURGER, TimeLimit);
+	int initialNumBurger = rand()% MaxNumOrder+1;			//when open the shop, randomly add order first
 	for(int i=0; i<initialNumBurger; i++){
 		burgerShop.addOneOrder();
 	}
