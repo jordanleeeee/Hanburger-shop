@@ -42,14 +42,6 @@ struct Ingredient{
 		}
 };
 
-Ingredient bread{"Bread", 'B', 'b'};
-Ingredient cheese{"Cheese", 'C', 'c'};
-Ingredient beef{"Beef", 'F', 'f'};
-Ingredient lettuce{"Lettuce", 'L', 'l'};
-Ingredient tomato{"Tomato", 'T', 't'};
-Ingredient mushroom{"Mushroom", 'M', 'm'};
-Ingredient egg{"Egg", 'E', 'e'};
-Ingredient salmon{"Salmon", 'S', 's'};
-Ingredient chicken{"Chicken", 'K', 'k'};
+
 
 #endif /* INGREDIENTS_H_ */

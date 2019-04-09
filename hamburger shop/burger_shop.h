@@ -12,6 +12,7 @@
 
 int MaxNumOrder=5;
 const int TYPEOFBURGER=6;
+int TimeLimit=40;
 
 class Shop{
 	private:
@@ -87,7 +88,7 @@ void Shop::removeCompletedOrder(){					//some error
 }
 void Shop::removeOutOfTimeOrder(){					//some error
 	for(int i=0; i<numOrder; i++){
-		if(burger[i]->getRemainingTime()<0){
+		if(burger[i]->getRemainingTime(TimeLimit)<0){
 			delete burger[i];
 			burger[i]=nullptr;
 			for(int j=i; j<numOrder; j++){
@@ -110,7 +111,7 @@ void Shop::gameMenu(){		//process order page
 	for(int i=0; i<numOrder; i++){
 		cout<<"Order #"<<i+1<<": "<<burger[i]->type<<" burger, ";
 		cout<<burger[i]->burger_status<<", ";
-		burger[i]->printRemainingTime();
+		burger[i]->printRemainingTime(TimeLimit);
 	}
 	cout<<"-----------------------------------------------"<<endl;
 	cout<<"Score: "<<score<<endl;
@@ -154,7 +155,7 @@ void Shop::action(){
 		int num=choice-'0';
 		num--;
 		if(num>=0 && num<numOrder){
-			burger[num]->burgerOperation(num, score);
+			burger[num]->burgerOperation(num, score, TimeLimit);
 		}
 		else{
 			cout<<"wrong input...."<<endl;

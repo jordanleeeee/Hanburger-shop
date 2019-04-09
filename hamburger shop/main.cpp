@@ -33,17 +33,21 @@ int main()
 		cout<<"*****************\n";
 		cout<<"Option (1 - 6):\n";
 
-		cin>>choice;
+		while(!(cin>>choice)){
+			cin.ignore();
+			cin>>choice;
+		}
 		switch(choice){
-			case 1: startgame(); break;			//incomplete
-			case 2:	setting(); break;			//complete
-			case 3: burgerMenue(); break;		//complete
-			case 4: instruction(); break;		//incomplete
-			case 5: credit(); break;			//incomplete
-			case 6: quitGame(endGame); break;		//incomplete
+			case 1: startgame(); break;
+			case 2:	setting(); break;
+			case 3: burgerMenue(); break;
+			case 4: instruction(); break;
+			case 5: credit(); break;
+			case 6: quitGame(endGame); break;
 			default: cout<<"wrong input"<<endl; break;
 		}
 	}
+
 	cout<<"Game End, thx for playing"<<endl;
 	return 0;
 }
