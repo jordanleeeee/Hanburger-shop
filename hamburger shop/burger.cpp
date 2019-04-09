@@ -5,7 +5,11 @@
  *      Author: User3w
  */
 
+#include <ctime>
+#include <iostream>
 #include "burger.h"
+
+using namespace std;
 
 Ingredient bread{"Bread", 'B', 'b'};
 Ingredient cheese{"Cheese", 'C', 'c'};

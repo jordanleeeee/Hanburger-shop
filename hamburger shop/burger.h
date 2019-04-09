@@ -9,11 +9,6 @@
 #define BURGER_H_
 
 #include "ingredients.h"
-#include <cstdlib>
-#include <ctime>
-#include <iostream>
-
-using namespace std;
 
 enum Types{Cheese, Beef, Mushroom, Veggie, Salmon, Chicken};
 enum Status{preparing, cooking, ready_to_serve, completed};
