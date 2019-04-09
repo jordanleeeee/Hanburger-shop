@@ -44,11 +44,8 @@ ostream& operator<<(ostream& os, const Status& s) {
     return os;
 }
 
-Burger::Burger(Types type): type(type), timeStartCook(0){
-
-	initial_time=time(0);
-	burger_status=preparing;
-
+Burger::Burger(Types type): type(type), burger_status(preparing),
+		timeStartCook(0), initial_time(time(0)){
 	switch(type){
 		case Cheese:
 			cooking_time=10;
@@ -151,17 +148,16 @@ void Burger::burgerOperation(const int& num, int& score, const int& TimeLimit){
 			cookingBurger(num);
 			break;
 		case ready_to_serve:
-			cout<<"ready to serve"<<endl;
 			ready_to_serveBurger(num, score);
 			break;
 		default:
-			cout<<"error"<<endl;
+			cerr<<"error"<<endl;
 	}
 }
 void Burger::preparingBurger(const int& num, const int& TimeLimit){
 	cout<<"*** Process Order ***\n";
 	cout<<"Order #\t\t\t: "<<num+1<<endl;
-	cout<<"Burger\t\t\t: "<<type<< " Burger"<<endl;
+	cout<<"Burger\t\t\t: "<<type<< " Burger\n";
 	cout<<"Status\t\t\t: "<<burger_status<<endl;
 	cout<<"Remaining Time\t\t: ";
 	printRemainingTime(TimeLimit);
