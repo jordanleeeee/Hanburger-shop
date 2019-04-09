@@ -8,6 +8,7 @@
 using namespace std;
 
 #include"burger_shop.h"
+#include"burger.h"
 
 int MaxNumOrder=5;
 const int TYPEOFBURGER=6;
