@@ -34,8 +34,9 @@ int main()
 		cout<<"Option (1 - 6):\n";
 
 		while(!(cin>>choice)){
-			cin.ignore();
-			cin>>choice;
+			cout<<"wrong input, must be a number"<<endl;
+			cin.clear();
+			cin.ignore(100,'\n');
 		}
 		switch(choice){
 			case 1: startgame(); break;
@@ -44,7 +45,7 @@ int main()
 			case 4: instruction(); break;
 			case 5: credit(); break;
 			case 6: quitGame(endGame); break;
-			default: cout<<"wrong input"<<endl; break;
+			default: cout<<"must be a number between 1-6"<<endl; break;
 		}
 	}
 
