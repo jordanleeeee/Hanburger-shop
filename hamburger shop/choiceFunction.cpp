@@ -5,6 +5,7 @@
  *      Author: User3w
  */
 #include <iostream>
+
 using namespace std;
 
 #include"burger_shop.h"
@@ -28,7 +29,7 @@ void startgame(){
 		burgerShop.checkingLoss();
 	}
 	cout<<"your final score is "<<burgerShop.getScore()<<endl;
-	cout<<"Maybe you want to play the game again"<<endl;
+	cout<<"Maybe you want to play the game again"<<endl<<endl;
 }
 //here is function relation to setting
 void setTimeLimit(){
@@ -97,7 +98,7 @@ void setting(){
 			case 1: setTimeLimit(); break;
 			case 2: setMaxNumOrder(); break;
 			case 3: done=true; break;
-			default: cout<<"wrong input"<<endl; break;
+			default: cout<<"wrong input, please enter an number in between 1-3"<<endl; break;
 		}
 	}
 }
@@ -138,7 +139,6 @@ void burgerMenue(){
 	bool done=false;
 	int choice;
 	while(!done){
-		system("CLS");
 		cout<<"**** Burger Menu *****\n";
 		cout<<"[1] Types of Burger\n";
 		cout<<"[2] Ingredient Symbols\n";
@@ -169,7 +169,7 @@ void instruction(){
 
 //TODO write your info here
 void credit(){
-	cout<<"Written by HKUST CS Students"<<endl;
+	cout<<"Written by HKUST CSE Students"<<endl;
 	system("pause"); // Wait until user pressing any key to continue
 }
 

@@ -4,6 +4,10 @@
  *  Created on: Apr 7, 2019
  *      Author: User3w
  */
+#include <ctime>
+#include <iostream>
+
+using namespace std;
 
 #include "burger_shop.h"
 
@@ -46,7 +50,7 @@ void Shop::randomlyAddOrder(){
 		addOneOrder();
 	}
 }
-void Shop::removeCompletedOrder(){					//some error
+void Shop::removeCompletedOrder(){
 	for(int i=0; i<numOrder; i++){
 		if(burger[i]->burger_status==completed){
 			burger[i]=nullptr;
@@ -59,7 +63,7 @@ void Shop::removeCompletedOrder(){					//some error
 		}
 	}
 }
-void Shop::removeOutOfTimeOrder(){					//some error
+void Shop::removeOutOfTimeOrder(){
 	for(int i=0; i<numOrder; i++){
 		if(burger[i]->getRemainingTime(timeLimit)<0){
 			delete burger[i];

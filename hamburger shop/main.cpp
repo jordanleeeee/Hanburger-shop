@@ -48,8 +48,8 @@ int main()
 			default: cout<<"must be a number between 1-6"<<endl; break;
 		}
 	}
-
 	cout<<"Game End, thx for playing"<<endl;
+
 	return 0;
 }
 
