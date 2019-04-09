@@ -24,7 +24,7 @@ struct Ingredient{
 				cout<<name<<"\t\t"<<Symbol<<'/'<<symbol<<endl;
 			}
 		}
-		void printIngredientName(){
+		void printIngredientName() const{
 
 			if(name=="Chicken"){
 				string str1(name,0,4);
