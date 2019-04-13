@@ -57,8 +57,7 @@ void Shop::removeCompletedOrder(){
 			for(int j=i; j<numOrder; j++){
 				burger[j]=burger[j+1];
 			}
-			burger[numOrder]=nullptr;
-			numOrder--;
+			burger[numOrder--]=nullptr;
 			return;
 		}
 	}
@@ -71,8 +70,7 @@ void Shop::removeOutOfTimeOrder(){
 			for(int j=i; j<numOrder; j++){
 				burger[j]=burger[j+1];
 			}
-			burger[numOrder]=nullptr;
-			numOrder--;
+			burger[numOrder--]=nullptr;
 			score-=5;
 		}
 	}
